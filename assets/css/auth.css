@@ -1,0 +1,93 @@
+/* Auth Section Styles */
+.auth-section {
+    padding: 80px 0;
+    background-color: #f4fafd;
+  }
+  
+  .auth-form {
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+    background-color: white;   /* Asegura fondo blanco */
+    padding: 2rem;             /* Espacio interno para que botones y campos estén dentro */
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;    /* Incluye padding en ancho total */
+  }
+  
+  .auth-form .btn-submit,
+  .auth-form .btn-outline-secondary {
+    font-size: 0.9rem;
+    max-width: 160px;
+    width: 100%;
+    padding: 0.5rem 1rem;
+    border-radius: 50px;
+    font-weight: 600;
+    transition: background 0.2s;
+    box-sizing: border-box;
+    display: inline-block;
+    margin: 0 auto;
+  }
+  
+  .auth-form .btn-submit {
+    background: var(--accent-color, #3498db);
+    color: #fff;
+    border: none;
+  }
+  
+  .auth-form .btn-submit:hover {
+    background: #27708c;
+  }
+  
+  .auth-form .btn-outline-secondary {
+    /* Cambiar para botón secundario con borde y fondo transparente */
+    border: 1px solid var(--accent-color, #3498db);
+    background: transparent;
+    color: var(--accent-color, #3498db);
+  }
+  
+  .auth-form .btn-outline-secondary:hover {
+    background: var(--accent-color, #27708c);
+    color: var(--contrast-color, #fff);
+  }
+  
+  .auth-form .d-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Dos columnas iguales */
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1.5rem;
+    padding: 0 1rem;
+  }
+  
+  .btn-toggle-password {
+    position: absolute;
+    right: 10px;
+    top: 40px; /* Ajustar según altura del input */
+    background: transparent !important;
+    border: none;
+    color: #6c757d;
+    cursor: pointer;
+    outline: none;
+    height: 24px;
+    width: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 5;
+    padding: 0;
+  }
+  
+  .btn-toggle-password:hover {
+    color: var(--accent-color, #3498db);
+  }
+  
+  .position-relative {
+    position: relative;
+    margin-bottom: 1.5rem; /* Espacio debajo del campo */
+  }
+  
+  .form-control {
+    padding-right: 40px; /* Para espacio del botón mostrar contraseña */
+  }
+  
