@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="es">
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
@@ -15,7 +14,8 @@
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com" rel="preconnect">
   <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Story+Script&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Story+Script&display=swap" rel="stylesheet">
+
   <!-- Vendor CSS Files -->
   <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
@@ -44,7 +44,7 @@
 
       <a href="index.html" class="logo d-flex align-items-center me-auto">
         <!-- Uncomment the line below if you also wish to use an image logo -->
-         <!--[CAMBIO: Logo con imagen y fuente Story Script]--> 
+        <!--[CAMBIO: Logo con imagen y fuente Story Script]--> 
         <span class="d-flex align-items-center gap-2">
           <img src="assets/img/logo.png" alt="Logo Visso" class="rounded-circle" style="height: 48px; width: 48px; object-fit: cover;">
           <h1 class="sitename mb-0 font-story-script">Visso</h1>
@@ -59,11 +59,11 @@
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>
 
-
-  <!-- [CAMBIO :  agregar botones de carrito e ingreso] -->
-  <div class="d-flex gap-2">
-        <a class="btn-getstarted d-flex align-items-center gap-1" href="carrito.html">
+      <!-- [CAMBIO :  agregar botones de carrito e ingreso] -->
+      <div class="d-flex gap-2">
+        <a class="btn-getstarted d-flex align-items-center gap-1 position-relative" href="carrito.html">
           <i class="bi bi-cart"></i> Carrito
+          <span id="cartCount" class="position-absolute translate-middle badge rounded-pill bg-danger" style="top:-6px; right:-10px;">0</span>
         </a>
         <a class="btn-getstarted d-flex align-items-center gap-1" href="auth.html">
           <i class="bi bi-person"></i> Ingresar
@@ -72,80 +72,304 @@
 
     </div>
   </header>
+
   <main class="main">
 
-    <!-- Page Title -->
-    <div class="page-title" data-aos="fade">
+    <!-- Header de página -->
+    <section class="page-header">
       <div class="container">
-        <nav class="breadcrumbs">
-          <ol>
-            <li><a href="index.html">Home</a></li>
-            <li class="current">Starter Page</li>
-          </ol>
-        </nav>
-        <h1>Starter Page</h1>
+        <div class="row">
+          <div class="col-lg-8">
+            <h1 class="display-4 fw-bold mb-3" id="titulo_carrito">Carrito de Compras</h1>
+            <p class="lead mb-0">Revisa y confirma tu selección antes de proceder al pago</p>
+          </div>
+        </div>
       </div>
-    </div><!-- End Page Title -->
-
-    <!-- Starter Section Section -->
-    <section id="starter-section" class="starter-section section">
-
-      <!-- Section Title -->
-      <div class="container section-title" data-aos="fade-up">
-        <h2>Starter Section</h2>
-        <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
-      </div><!-- End Section Title -->
-
-      <div class="container" data-aos="fade-up">
-        <p>Use this page as a starter for your own custom pages.</p>
-      </div>
-
-    </section><!-- /Starter Section Section -->
-
-  </main>
-
-  <footer id="footer" class="footer">
+    </section>
 
     <div class="container">
-      <div class="copyright text-center ">
-        <p>© <span>Copyright</span> <strong class="px-1 sitename">Vesperr</strong> <span>All Rights Reserved</span></p>
-      </div>
-      <div class="social-links d-flex justify-content-center">
-        <a href=""><i class="bi bi-twitter-x"></i></a>
-        <a href=""><i class="bi bi-facebook"></i></a>
-        <a href=""><i class="bi bi-instagram"></i></a>
-        <a href=""><i class="bi bi-linkedin"></i></a>
-      </div>
-      <div class="credits">
-        <!-- All the links in the footer should remain intact. -->
-        <!-- You can delete the links only if you've purchased the pro version. -->
-        <!-- Licensing information: https://bootstrapmade.com/license/ -->
-        <!-- Purchase the pro version with working PHP/AJAX contact form: [buy-url] -->
-        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a> Distributed by <a href="https://themewagon.com" target="_blank">ThemeWagon</a>
+      <div class="row">
+        <div class="col-lg-8">
+          <!-- Botón continuar comprando -->
+          <div class="mb-4">
+            <a href="tienda.html" class="btn btn-continue">
+              <i class="bi bi-arrow-left me-2"></i>Continuar Comprando
+            </a>
+          </div>
+
+          <!-- Lista de productos en el carrito -->
+          <div id="cartItemsContainer">
+            <!-- Los items se cargarán dinámicamente aquí -->
+          </div>
+        </div>
+
+        <div class="col-lg-4">
+          <!-- Resumen de la compra -->
+          <div class="summary-card">
+            <h4 class="mb-4">Resumen de la Compra</h4>
+
+            <div class="summary-row">
+              <span>Subtotal:</span>
+              <span id="subtotal">$0</span>
+            </div>
+
+            <div class="summary-row">
+              <span>Envío:</span>
+              <span id="shipping">Gratis</span>
+            </div>
+
+            <div class="summary-row">
+              <span>IVA (19%):</span>
+              <span id="iva">$0</span>
+            </div>
+
+            <div class="coupon-section">
+              <h6 class="mb-3">¿Tienes un cupón de descuento?</h6>
+              <div class="d-flex gap-2">
+                <input type="text" class="form-control coupon-input" id="couponInput" placeholder="Código del cupón">
+                <button class="btn btn-coupon" onclick="aplicarCupon()">Aplicar</button>
+              </div>
+              <div id="couponMessage" class="mt-2" style="display: none;"></div>
+            </div>
+
+            <div class="summary-row" id="discountRow" style="display: none;">
+              <span>Descuento:</span>
+              <span id="discount" class="text-success">$0</span>
+            </div>
+
+            <div class="summary-row">
+              <span>Total:</span>
+              <span id="total">$0</span>
+            </div>
+
+            <button class="btn btn-checkout mt-3" onclick="procederPago()" id="checkoutBtn">
+              <i class="bi bi-credit-card me-2"></i>Proceder al Pago
+            </button>
+
+            <div class="text-center mt-3">
+              <small class="text-muted">
+                <i class="bi bi-shield-check me-1"></i>
+                Compra 100% segura y protegida
+              </small>
+            </div>
+          </div>
+
+          <!-- Información adicional -->
+          <div class="summary-card mt-4">
+            <h6 class="mb-3">Información de Envío</h6>
+            <div class="d-flex align-items-center mb-2">
+              <i class="bi bi-truck text-success me-3"></i>
+              <div>
+                <strong>Envío gratis</strong>
+                <br><small class="text-muted">En compras sobre $50.000</small>
+              </div>
+            </div>
+            <div class="d-flex align-items-center mb-2">
+              <i class="bi bi-clock text-primary me-3"></i>
+              <div>
+                <strong>Entrega rápida</strong>
+                <br><small class="text-muted">2-3 días hábiles</small>
+              </div>
+            </div>
+            <div class="d-flex align-items-center">
+              <i class="bi bi-arrow-counterclockwise text-warning me-3"></i>
+              <div>
+                <strong>Devoluciones</strong>
+                <br><small class="text-muted">30 días para cambios</small>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
+    <!-- Modal de confirmación de eliminación -->
+    <div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Confirmar Eliminación</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+          </div>
+          <div class="modal-body">
+            <p>¿Estás seguro de que deseas eliminar este producto del carrito?</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+            <button type="button" class="btn btn-danger" onclick="confirmarEliminacion()">Eliminar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal de checkout -->
+    <div class="modal fade" id="checkoutModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header bg-primary text-white">
+            <h5 class="modal-title">Finalizar Compra</h5>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+          </div>
+          <div class="modal-body">
+            <form id="checkoutForm" novalidate>
+              <div class="row">
+                <div class="col-12">
+                  <h6 class="mb-3">Información de Contacto</h6>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label">Nombre Completo *</label>
+                  <input type="text" class="form-control" id="fullName" required>
+                  <div class="invalid-feedback">Por favor ingresa tu nombre completo</div>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label">Email *</label>
+                  <input type="email" class="form-control" id="email" required>
+                  <div class="invalid-feedback">Por favor ingresa un email válido</div>
+                </div>
+                <div class="col-md-6 mt-3">
+                  <label class="form-label">Teléfono *</label>
+                  <input type="tel" class="form-control" id="phone" required>
+                  <div class="invalid-feedback">Por favor ingresa tu teléfono</div>
+                </div>
+                <div class="col-md-6 mt-3">
+                  <label class="form-label">RUT *</label>
+                  <input type="text" class="form-control" id="rut" placeholder="12345678-9" required>
+                  <div class="invalid-feedback">Por favor ingresa un RUT válido</div>
+                </div>
+              </div>
+
+              <hr class="my-4">
+
+              <div class="row">
+                <div class="col-12">
+                  <h6 class="mb-3">Dirección de Envío</h6>
+                </div>
+                <div class="col-12">
+                  <label class="form-label">Dirección *</label>
+                  <input type="text" class="form-control" id="address" required>
+                  <div class="invalid-feedback">Por favor ingresa tu dirección</div>
+                </div>
+                <div class="col-md-4 mt-3">
+                  <label class="form-label">Comuna *</label>
+                  <select class="form-control" id="comuna" required>
+                    <option value="">Seleccionar comuna</option>
+                    <option value="santiago">Santiago</option>
+                    <option value="providencia">Providencia</option>
+                    <option value="las-condes">Las Condes</option>
+                    <option value="vitacura">Vitacura</option>
+                    <option value="nunoa">Ñuñoa</option>
+                  </select>
+                  <div class="invalid-feedback">Por favor selecciona tu comuna</div>
+                </div>
+                <div class="col-md-4 mt-3">
+                  <label class="form-label">Región *</label>
+                  <select class="form-control" id="region" required>
+                    <option value="">Seleccionar región</option>
+                    <option value="metropolitana" selected>Región Metropolitana</option>
+                  </select>
+                  <div class="invalid-feedback">Por favor selecciona tu región</div>
+                </div>
+                <div class="col-md-4 mt-3">
+                  <label class="form-label">Código Postal</label>
+                  <input type="text" class="form-control" id="postalCode">
+                </div>
+              </div>
+
+              <hr class="my-4">
+
+              <div class="row">
+                <div class="col-12">
+                  <h6 class="mb-3">Método de Pago</h6>
+                </div>
+                <div class="col-12">
+                  <div class="form-check mb-2">
+                    <input class="form-check-input" type="radio" name="paymentMethod" id="creditCard" value="creditCard" checked>
+                    <label class="form-check-label" for="creditCard">
+                      <i class="bi bi-credit-card me-2"></i>Tarjeta de Crédito/Débito
+                    </label>
+                  </div>
+                  <div class="form-check mb-2">
+                    <input class="form-check-input" type="radio" name="paymentMethod" id="transfer" value="transfer">
+                    <label class="form-check-label" for="transfer">
+                      <i class="bi bi-bank me-2"></i>Transferencia Bancaria
+                    </label>
+                  </div>
+                  <div class="form-check mb-3">
+                    <input class="form-check-input" type="radio" name="paymentMethod" id="webpay" value="webpay">
+                    <label class="form-check-label" for="webpay">
+                      <i class="bi bi-phone me-2"></i>WebPay
+                    </label>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-check mb-3">
+                <input class="form-check-input" type="checkbox" id="terms" required>
+                <label class="form-check-label" for="terms">
+                  Acepto los <a href="#" class="text-primary">términos y condiciones</a> y la <a href="#" class="text-primary">política de privacidad</a> *
+                </label>
+                <div class="invalid-feedback">Debes aceptar los términos y condiciones</div>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+            <button type="button" class="btn btn-primary" onclick="finalizarCompra()">
+              <i class="bi bi-credit-card me-2"></i>Confirmar Pedido
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+  <footer class="footer bg-dark text-white pt-5 pb-3">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-5 mb-4">
+          <h5 class="mb-3">
+            <i class="fas fa-eye"></i> Visso Óptica
+          </h5>
+          <p class="mb-4">Tu visión es nuestra prioridad. Ofrecemos productos y servicios de calidad superior para cuidar tu salud visual.</p>
+          <img src="assets/img/logo_mod.png" alt="Logo Visso" class="rounded-circle mb-3" style="height: 64px; width: 64px; object-fit: cover;">
+        </div>
+        <div class="col-lg-3 mb-4">
+          <h6 class="mb-3">Enlaces</h6>
+          <ul class="list-unstyled">
+            <li><a href="#hero" class="text-white-50">Inicio</a></li>
+            <li><a href="#about" class="text-white-50">Nosotros</a></li>
+            <li><a href="tienda.html" class="text-white-50">Tienda</a></li>
+            <li><a href="#contacto" class="text-white-50">Contacto</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-4 mb-4">
+          <h6 class="mb-3">Servicios</h6>
+          <ul class="list-unstyled">
+            <li class="text-white-50">Lentes Oftálmicos</li>
+            <li class="text-white-50">Gafas de Sol</li>
+            <li class="text-white-50">Lentes de Contacto</li>
+          </ul>
+        </div>
+      </div>
+      <hr class="my-4 border-secondary">
+      <div class="row align-items-center">
+        <div class="col-md-6">
+          <p class="text-white-50 mb-0">&copy; 2025 Visso Óptica. Todos los derechos reservados.</p>
+        </div>
+        <div class="col-md-6 text-md-end">
+          <a href="admin.html" class="text-white-50">Administración</a>
+        </div>
+      </div>
+    </div>
   </footer>
-
-  <!-- Scroll Top -->
-  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
-
-  <!-- Preloader -->
-  <div id="preloader"></div>
-
-  <!-- Vendor JS Files -->
+ </footer>
+  <script src="assets/js/carrito.js"></script>
+  <!-- Vendor JS Files (necesarios para modales y componentes) -->
   <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="assets/vendor/php-email-form/validate.js"></script>
   <script src="assets/vendor/aos/aos.js"></script>
   <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
-  <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
   <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
-  <script src="assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
-  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-
-  <!-- Main JS File -->
   <script src="assets/js/main.js"></script>
 
 </body>
-
 </html>
