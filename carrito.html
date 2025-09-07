@@ -184,7 +184,7 @@
     </div>
 
     <!-- Modal de confirmación de eliminación -->
-    <div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-hidden="true">
+    <!--<div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
@@ -200,127 +200,10 @@
           </div>
         </div>
       </div>
-    </div>
+    </div>-->
 
     <!-- Modal de checkout -->
-    <div class="modal fade" id="checkoutModal" tabindex="-1" aria-hidden="true">
-      <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-          <div class="modal-header bg-primary text-white">
-            <h5 class="modal-title">Finalizar Compra</h5>
-            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
-          </div>
-          <div class="modal-body">
-            <form id="checkoutForm" novalidate>
-              <div class="row">
-                <div class="col-12">
-                  <h6 class="mb-3">Información de Contacto</h6>
-                </div>
-                <div class="col-md-6">
-                  <label class="form-label">Nombre Completo *</label>
-                  <input type="text" class="form-control" id="fullName" required>
-                  <div class="invalid-feedback">Por favor ingresa tu nombre completo</div>
-                </div>
-                <div class="col-md-6">
-                  <label class="form-label">Email *</label>
-                  <input type="email" class="form-control" id="email" required>
-                  <div class="invalid-feedback">Por favor ingresa un email válido</div>
-                </div>
-                <div class="col-md-6 mt-3">
-                  <label class="form-label">Teléfono *</label>
-                  <input type="tel" class="form-control" id="phone" required>
-                  <div class="invalid-feedback">Por favor ingresa tu teléfono</div>
-                </div>
-                <div class="col-md-6 mt-3">
-                  <label class="form-label">RUT *</label>
-                  <input type="text" class="form-control" id="rut" placeholder="12345678-9" required>
-                  <div class="invalid-feedback">Por favor ingresa un RUT válido</div>
-                </div>
-              </div>
-
-              <hr class="my-4">
-
-              <div class="row">
-                <div class="col-12">
-                  <h6 class="mb-3">Dirección de Envío</h6>
-                </div>
-                <div class="col-12">
-                  <label class="form-label">Dirección *</label>
-                  <input type="text" class="form-control" id="address" required>
-                  <div class="invalid-feedback">Por favor ingresa tu dirección</div>
-                </div>
-                <div class="col-md-4 mt-3">
-                  <label class="form-label">Comuna *</label>
-                  <select class="form-control" id="comuna" required>
-                    <option value="">Seleccionar comuna</option>
-                    <option value="santiago">Santiago</option>
-                    <option value="providencia">Providencia</option>
-                    <option value="las-condes">Las Condes</option>
-                    <option value="vitacura">Vitacura</option>
-                    <option value="nunoa">Ñuñoa</option>
-                  </select>
-                  <div class="invalid-feedback">Por favor selecciona tu comuna</div>
-                </div>
-                <div class="col-md-4 mt-3">
-                  <label class="form-label">Región *</label>
-                  <select class="form-control" id="region" required>
-                    <option value="">Seleccionar región</option>
-                    <option value="metropolitana" selected>Región Metropolitana</option>
-                  </select>
-                  <div class="invalid-feedback">Por favor selecciona tu región</div>
-                </div>
-                <div class="col-md-4 mt-3">
-                  <label class="form-label">Código Postal</label>
-                  <input type="text" class="form-control" id="postalCode">
-                </div>
-              </div>
-
-              <hr class="my-4">
-
-              <div class="row">
-                <div class="col-12">
-                  <h6 class="mb-3">Método de Pago</h6>
-                </div>
-                <div class="col-12">
-                  <div class="form-check mb-2">
-                    <input class="form-check-input" type="radio" name="paymentMethod" id="creditCard" value="creditCard" checked>
-                    <label class="form-check-label" for="creditCard">
-                      <i class="bi bi-credit-card me-2"></i>Tarjeta de Crédito/Débito
-                    </label>
-                  </div>
-                  <div class="form-check mb-2">
-                    <input class="form-check-input" type="radio" name="paymentMethod" id="transfer" value="transfer">
-                    <label class="form-check-label" for="transfer">
-                      <i class="bi bi-bank me-2"></i>Transferencia Bancaria
-                    </label>
-                  </div>
-                  <div class="form-check mb-3">
-                    <input class="form-check-input" type="radio" name="paymentMethod" id="webpay" value="webpay">
-                    <label class="form-check-label" for="webpay">
-                      <i class="bi bi-phone me-2"></i>WebPay
-                    </label>
-                  </div>
-                </div>
-              </div>
-
-              <div class="form-check mb-3">
-                <input class="form-check-input" type="checkbox" id="terms" required>
-                <label class="form-check-label" for="terms">
-                  Acepto los <a href="#" class="text-primary">términos y condiciones</a> y la <a href="#" class="text-primary">política de privacidad</a> *
-                </label>
-                <div class="invalid-feedback">Debes aceptar los términos y condiciones</div>
-              </div>
-            </form>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-            <button type="button" class="btn btn-primary" onclick="finalizarCompra()">
-              <i class="bi bi-credit-card me-2"></i>Confirmar Pedido
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
+  <!-- Modal de checkout eliminado -->
 
   </main>
   <footer class="footer bg-dark text-white pt-5 pb-3">
@@ -337,8 +220,6 @@
           <h6 class="mb-3">Enlaces</h6>
           <ul class="list-unstyled">
             <li><a href="#hero" class="text-white-50">Inicio</a></li>
-            <li><a href="#about" class="text-white-50">Nosotros</a></li>
-            <li><a href="tienda.html" class="text-white-50">Tienda</a></li>
             <li><a href="#contacto" class="text-white-50">Contacto</a></li>
           </ul>
         </div>

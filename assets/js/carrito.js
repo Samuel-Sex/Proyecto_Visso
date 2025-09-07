@@ -1,13 +1,7 @@
 let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
 let itemAEliminar = null;
-let cuponAplicado = null;
 
-// Cupones disponibles
-const cupones = {
-  'VISSO10': { descuento: 0.10, descripcion: '10% de descuento' },
-  'NUEVA20': { descuento: 0.20, descripcion: '20% de descuento para nuevos clientes' },
-  'ENVIO5':  { descuento: 0.05, descripcion: '5% de descuento' }
-};
+
 
 document.addEventListener('DOMContentLoaded', function () {
   cargarCarrito();
@@ -24,8 +18,8 @@ function cargarCarrito() {
         <i class="bi bi-bag fs-1 mb-3"></i>
         <h3 class="mb-3" id="carrito_vacio">Tu carrito está vacío</h3>
         <p id="parrafo_carrito" class="text-muted mb-4">¡Agrega algunos productos increíbles a tu carrito!</p>
-        <a id="irTienda" href="tienda.html" class="btn btn-primary">
-          <i class="bi bi-bag me-2"></i> Ir a la Tienda
+    <a id="irTienda" href="tienda.html" class="btn-getstarted d-inline-flex align-items-center gap-1" style="background:#fff; color:#2c5282; border:2px solid #2c5282;">
+        Ir a la Tienda
         </a>
       </div>
     `;
