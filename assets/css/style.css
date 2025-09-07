@@ -193,3 +193,38 @@
     text-align: center;
     margin-bottom: 20px;
 }
+/* =================== [CAMBIO: PAGINA CARRITO] =================== */
+#titulo_carrito {
+	font-size: 2rem;
+	font-weight: 700;
+	margin-bottom: 30px;
+	color: #cad5e0;
+	border-bottom: 2px solid #3498db;
+	padding-bottom: 5px;
+}
+#carrito_vacio {
+	text-align: center;
+	font-size: 1.2rem;
+	color: #f5f5f5;
+	margin-top: 0px;
+}
+#carro_completo {
+	background: #020024;
+	background: linear-gradient(90deg, rgb(183, 181, 230) 0%, rgb(125, 125, 224) 43%, rgba(1, 165, 212, 1) 69%, rgba(0, 212, 255, 1) 87%);
+	background-attachment: fixed;
+	margin-top: 20px;
+}	
+#irTienda {
+	background: #07052e;
+	background: linear-gradient(90deg, rgba(7, 5, 46, 1) 100%, rgba(112, 85, 85, 1) 100%, rgba(1, 165, 212, 1) 100%, rgba(2, 134, 184, 1) 100%, rgba(4, 4, 66, 1) 100%, rgba(0, 212, 255, 1) 100%);
+	border: none;
+	border-radius: 25px;
+	padding: 10px 25px;
+	font-weight: 600;
+	transition: all 0.3s ease;
+	margin-top: 20px;
+}
+#parrafo_carrito{
+	color: #f0eaea;
+	font-size: 1.1rem;
+}
