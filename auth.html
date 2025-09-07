@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8" />
   <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-  <title>Starter Page - Vesperr Bootstrap Template</title>
+  <title>Visso - Autenticación</title>
 
   <!-- Favicons -->
   <link href="assets/img/favicon.png" rel="icon" />
@@ -93,7 +93,7 @@
               </form>
 
               <!-- Formulario de Registro -->
-              <form id="registerForm" style="display: none">
+              <form id="registerForm" style="display: none" novalidate>
 
                 <div class="mb-3">
                   <label for="newUsername" class="form-label">Nombre de Usuario</label>
@@ -109,7 +109,7 @@
 
                 <div class="mb-3">
                   <label for="email" class="form-label">Email</label>
-                  <input type="email" class="form-control" id="email" required />
+                  <input type="email" class="form-control" id="email" required autocomplete="email" />
                   <div id="emailError" class="error-message text-danger small" style="display:none"></div>
                 </div>
 
@@ -161,7 +161,7 @@
         <div class="col-lg-3 mb-4">
           <h6 class="mb-3">Enlaces</h6>
           <ul class="list-unstyled">
-            <li><a href="#hero" class="text-white-50">Inicio</a></li>
+            <li><a href="index.html" class="text-white-50">Inicio</a></li>
             <li><a href="tienda.html" class="text-white-50">Tienda</a></li>
           </ul>
         </div>
@@ -178,9 +178,6 @@
       <div class="row align-items-center">
         <div class="col-md-6">
           <p class="text-white-50 mb-0">&copy; 2025 Visso Óptica. Todos los derechos reservados.</p>
-        </div>
-        <div class="col-md-6 text-md-end">
-          <a href="admin.html" class="text-white-50">Administración</a>
         </div>
       </div>
     </div>

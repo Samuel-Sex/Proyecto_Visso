@@ -6,7 +6,7 @@ const productos = [
         nombre: "Ray-Ban Aviator Classic",
         precio: 89990,
         categoria: "sol",
-        imagen: "https://images.unsplash.com/photo-1572635196237-14b3f281503f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+        imagen: "assets/img/productos/1.jpg",
         rating: 4.8,
         descripcion: "Las icónicas gafas de sol aviador de Ray-Ban. Un clásico atemporal que nunca pasa de moda.",
         caracteristicas: ["Protección UV 100%", "Lentes polarizados", "Montura de metal", "Estuche incluido"]
@@ -15,18 +15,19 @@ const productos = [
         id: 2,
         nombre: "Oakley Radar EV Path",
         precio: 129990,
-        categoria: "deportivos",
-        imagen: "https://images.unsplash.com/photo-1508296695146-257a814070b4?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+        categoria: "fotocromaticos",
+        imagen: "assets/img/productos/2.jpg",
         rating: 4.9,
-        descripcion: "Gafas deportivas de alto rendimiento diseñadas para atletas profesionales.",
-        caracteristicas: ["Tecnología Prizm", "Resistente al impacto", "Ajuste seguro", "Ventilación optimizada"]
+        descripcion: "Gafas fotocromáticas diseñadas para un uso diario, adaptándose automáticamente a distintas condiciones de luz.",
+        caracteristicas: [ "Lentes fotocromáticas que se oscurecen al exponerse al sol y se aclaran en interiores",
+    "Protección 100% contra rayos UVA, UVB y UVC"]
     },
     {
         id: 3,
         nombre: "Lentes Progresivos Zeiss",
         precio: 199990,
         categoria: "oftalmicos",
-        imagen: "https://images.unsplash.com/photo-1574258495973-f010dfbb5371?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+        imagen: "assets/img/productos/3.jpg",
         rating: 4.7,
         descripcion: "Lentes progresivos de última tecnología para una visión perfecta a todas las distancias.",
         caracteristicas: ["Tecnología progresiva", "Anti-reflejo", "Filtro luz azul", "Garantía 2 años"]
@@ -46,7 +47,7 @@ const productos = [
         nombre: "Tom Ford TF5401",
         precio: 299990,
         categoria: "oftalmicos",
-        imagen: "https://images.unsplash.com/photo-1473496169904-658ba7c44d8a?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+        imagen: "assets/img/productos/4.jpg",
         rating: 4.9,
         descripcion: "Montura de lujo Tom Ford con diseño sofisticado y materiales premium.",
         caracteristicas: ["Acetato italiano", "Diseño exclusivo", "Ajuste personalizable", "Certificado de autenticidad"]
@@ -56,7 +57,7 @@ const productos = [
         nombre: "Polaroid PLD 2083/S",
         precio: 45990,
         categoria: "sol",
-        imagen: "https://images.unsplash.com/photo-1511499767150-a48a237f0083?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+        imagen: "assets/img/productos/5.jpg",
         rating: 4.4,
         descripcion: "Gafas de sol modernas con lentes polarizados para máxima protección.",
         caracteristicas: ["Lentes polarizados", "Protección UV", "Diseño contemporáneo", "Múltiples colores"]
@@ -127,7 +128,7 @@ function obtenerNombreCategoria(categoria) {
         'oftalmicos': 'Oftálmicos',
         'sol': 'Gafas de Sol',
         'lectura': 'Lectura',
-        'deportivos': 'Deportivos'
+        'fotocromaticos': 'Fotocromáticos'
     };
     return categorias[categoria] || categoria;
 }

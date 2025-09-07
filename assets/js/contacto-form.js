@@ -1,3 +1,25 @@
+// Validación personalizada para teléfono chileno en el formulario de contacto
+document.addEventListener('DOMContentLoaded', function() {
+  const form = document.getElementById('contactForm');
+  if (!form) return;
+  const telefonoInput = document.getElementById('telefono');
+  const telefonoError = document.getElementById('telefonoError');
+
+    // Validar al enviar
+  form.addEventListener('submit', function(e) {
+    if (telefonoInput.value.trim() && !window.validarTelefonoChileno(telefonoInput.value.trim())) {
+      telefonoError.style.display = 'block';
+      telefonoError.textContent = 'Por favor ingresa un teléfono chileno válido (+56 9 XXXX XXXX)';
+      telefonoInput.focus();
+      e.preventDefault();
+    } else {
+      telefonoError.style.display = 'none';
+      telefonoError.textContent = '';
+    }
+  });
+});
+
+
 // [CAMBIO: Validación y envío para el formulario de contacto moderno]
 document.addEventListener('DOMContentLoaded', function() {
   const form = document.getElementById('contactForm');

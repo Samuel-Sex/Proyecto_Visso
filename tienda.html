@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>Starter Page - Vesperr Bootstrap Template</title>
+  <title>Visso - Tienda</title>
   <meta name="description" content="">
   <meta name="keywords" content="">
 
@@ -57,15 +57,12 @@
     <ul>
       <li><a href="index.html" class="active">Inicio<br></a></li>
       <li><a href="tienda.html">Tienda</a></li>
-  
-      <li class="d-xl-none"><a href="carrito.html">Carrito</a></li>
-      <li class="d-xl-none"><a href="auth.html">Ingresar</a></li>
     </ul>
     <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
   </nav>
   
-  <!-- Desktop/Tablet: botones persistentes a la derecha -->
-  <div class="d-none d-xl-flex align-items-center gap-2 ms-3">
+  <!-- Botones siempre visibles como en carrito.html -->
+  <div class="d-flex gap-2 ms-3">
     <a class="btn-getstarted d-flex align-items-center gap-1 position-relative" href="carrito.html">
       <i class="bi bi-cart"></i> Carrito
       <span class="cart-count" id="cartCount">0</span>
@@ -83,7 +80,7 @@
       <div class="container">
           <div class="row">
               <div class="col-lg-8">
-                  <h1 class="display-4 fw-bold mb-3" id="titulo-tienda">Nuestra Tienda</h1>
+                  <h1 class="display-4 fw-bold mb-3" id="titulo_tienda">Nuestra Tienda</h1>
                   <p class="lead mb-0">Descubre la colección más exclusiva de lentes y gafas de sol</p>
               </div>
           </div>
@@ -100,7 +97,7 @@
                   <button class="filter-btn" data-category="oftalmicos">Oftálmicos</button>
                   <button class="filter-btn" data-category="sol">Gafas de Sol</button>
                   <button class="filter-btn" data-category="lectura">Lectura</button>
-                  <button class="filter-btn" data-category="deportivos">Deportivos</button>
+                  <button class="filter-btn" data-category="fotocromaticos">Fotocromáticos</button>
               </div>
               <div class="col-md-6 mb-3">
                   <h5 class="mb-3">Buscar producto:</h5>
@@ -180,7 +177,7 @@
         <div class="col-lg-3 mb-4">
           <h6 class="mb-3">Enlaces</h6>
           <ul class="list-unstyled">
-            <li><a href="#hero" class="text-white-50">Inicio</a></li>
+            <li><a href="index.html" class="text-white-50">Inicio</a></li>
             <li><a href="tienda.html" class="text-white-50">Tienda</a></li>
           </ul>
         </div>
@@ -197,9 +194,6 @@
       <div class="row align-items-center">
         <div class="col-md-6">
           <p class="text-white-50 mb-0">&copy; 2025 Visso Óptica. Todos los derechos reservados.</p>
-        </div>
-        <div class="col-md-6 text-md-end">
-          <a href="admin.html" class="text-white-50">Administración</a>
         </div>
       </div>
     </div>

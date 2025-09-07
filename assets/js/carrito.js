@@ -1,5 +1,13 @@
+
 let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
 let itemAEliminar = null;
+
+// Declarar cuponAplicado y cupones si no existen
+let cuponAplicado = null;
+const cupones = {
+  'VISSO10': { descuento: 0.10, descripcion: '10% de descuento' },
+  'VISSO20': { descuento: 0.20, descripcion: '20% de descuento' }
+};
 
 
 
@@ -144,24 +152,25 @@ function actualizarContadores() {
   const cartCountEl = document.getElementById('cartCount');
   if (cartCountEl) cartCountEl.textContent = totalItems;
 
+
   // Calcular totales
   const subtotal = carrito.reduce((total, item) => total + (item.precio * item.cantidad), 0);
   const iva = Math.round(subtotal * 0.19);
   const descuento = cuponAplicado ? Math.round(subtotal * cuponAplicado.descuento) : 0;
-  const total = subtotal + iva - descuento;
+  const total = subtotal - descuento;
 
   const elSubtotal = document.getElementById('subtotal');
   const elIva = document.getElementById('iva');
   const elTotal = document.getElementById('total');
-  if (elSubtotal) elSubtotal.textContent = `${subtotal.toLocaleString('es-CL')}`;
-  if (elIva) elIva.textContent = `${iva.toLocaleString('es-CL')}`;
-  if (elTotal) elTotal.textContent = `${total.toLocaleString('es-CL')}`;
+  if (elSubtotal) elSubtotal.textContent = `$${subtotal.toLocaleString('es-CL')}`;
+  if (elIva) elIva.textContent = `$${iva.toLocaleString('es-CL')}`;
+  if (elTotal) elTotal.textContent = `$${total.toLocaleString('es-CL')}`;
 
   const discountRow = document.getElementById('discountRow');
   const discountEl = document.getElementById('discount');
   if (descuento > 0 && discountRow && discountEl) {
     discountRow.style.display = 'flex';
-    discountEl.textContent = `-${descuento.toLocaleString('es-CL')}`;
+    discountEl.textContent = `-$${descuento.toLocaleString('es-CL')}`;
   } else if (discountRow) {
     discountRow.style.display = 'none';
   }

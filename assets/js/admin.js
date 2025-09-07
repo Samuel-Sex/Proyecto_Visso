@@ -1,3 +1,7 @@
+// Actualiza los contadores al cargar la página y después de cada cambio
+document.addEventListener('DOMContentLoaded', function() {
+    if (typeof updateStats === 'function') updateStats();
+});
 
     // Datos de ejemplo (en producción estos vendrían de una base de datos)
     // Eliminada declaración duplicada de users. Usar solo la versión con los 5 campos obligatorios.

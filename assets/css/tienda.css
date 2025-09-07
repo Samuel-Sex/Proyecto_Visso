@@ -1,3 +1,41 @@
+/* Ajuste para que el header del modal no se traslape con la barra de navegación */
+.modal-dialog {
+    margin-top: 90px !important;
+}
+.modal-header {
+    position: sticky;
+    top: 0;
+    z-index: 1056;
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    color: white;
+    border-radius: 20px 20px 0 0;
+}
+/* Forzar scroll en el modal sin ocultar el scroll del body */
+.modal-open {
+    overflow-y: auto !important;
+    padding-right: 0 !important;
+}
+
+.modal-dialog {
+    max-width: 800px;
+    margin: 2rem auto;
+}
+
+.modal-content {
+    max-height: 85vh;
+    overflow-y: auto;
+}
+
+@media (max-width: 991.98px) {
+    .modal-dialog {
+        max-width: 98vw;
+        margin: 1rem auto;
+    }
+    .modal-content {
+        max-height: 90vh;
+    }
+}
+
 :root {
     --primary-color: #2c5282;
     --secondary-color: #63b3ed;
@@ -25,7 +63,7 @@ body {
 
 .page-header {
     background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-    color: rgb(2, 0, 0);
+    color: white;
     padding: 60px 0;
     margin-bottom: 40px;
 }
@@ -184,10 +222,16 @@ body {
 }
 
 .header.sticky-top { z-index: 1080; }
-.header .btn-getstarted { position: relative; z-index: 1060; white-space: nowrap; background-color: #2c5282; }
+.header .btn-getstarted { position: relative; z-index: 1060; white-space: nowrap; background-color: #3498db }
 
 .cart-count { pointer-events: none; }
 
-@media (max-width: 1199.98px) {
-  .header .btn-getstarted { display: none; }
+#titulo_tienda {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 30px;
+    color: #cad5e0;
+    border-bottom: 2px solid #3498db;
+    padding-bottom: 5px;
 }
+
