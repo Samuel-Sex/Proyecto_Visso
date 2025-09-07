@@ -35,12 +35,8 @@ document.addEventListener('DOMContentLoaded', function() {
     registerForm.addEventListener('submit', function(e) {
       e.preventDefault();
       if (validateRegistration()) {
-        alert('Registro exitoso!');
-        registerForm.style.display = 'none';
-        loginForm.style.display = 'block';
-        if (header) header.style.display = 'flex';
-        if (registerTitle) registerTitle.style.display = 'none';
-        if (formTitle) formTitle.style.display = 'block';
+        // Simular registro exitoso y redirigir a index.html
+        window.location.href = 'index.html';
       }
     });
   
@@ -72,34 +68,82 @@ document.addEventListener('DOMContentLoaded', function() {
   });
   
   function validateRegistration() {
-    let isValid = true;
-  
-    const email = document.getElementById('email').value;
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
-      document.getElementById('emailError').textContent = 'Ingrese un email válido';
-      isValid = false;
-    } else {
-      document.getElementById('emailError').textContent = '';
-    }
-  
-    const username = document.getElementById('newUsername').value;
-    if (username.length < 3) {
-      document.getElementById('usernameError').textContent = 'El nombre debe tener al menos 3 caracteres';
-      isValid = false;
-    } else {
-      document.getElementById('usernameError').textContent = '';
-    }
-  
-    if(!validatePassword()) {
-      isValid = false;
-    }
-  
-    if(!validatePasswordMatch()) {
-      isValid = false;
-    }
-  
-    return isValid;
+  let isValid = true;
+
+  // Validación de RUT
+  const rut = document.getElementById('rut').value.trim();
+  if (!window.validarRut ? rut.length < 8 : !window.validarRut(rut)) {
+    const el = document.getElementById('rutError');
+    el.textContent = 'Ingrese un RUT válido';
+    el.style.display = 'block';
+    isValid = false;
+  } else {
+    const el = document.getElementById('rutError');
+    el.textContent = '';
+    el.style.display = 'none';
+  }
+
+  // Validación de nombre
+  const username = document.getElementById('newUsername').value.trim();
+  if (username.length < 3) {
+    const el = document.getElementById('usernameError');
+    el.textContent = 'El nombre debe tener al menos 3 caracteres';
+    el.style.display = 'block';
+    isValid = false;
+  } else {
+    const el = document.getElementById('usernameError');
+    el.textContent = '';
+    el.style.display = 'none';
+  }
+
+  // Validación de email
+  const email = document.getElementById('email').value.trim();
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailRegex.test(email)) {
+    const el = document.getElementById('emailError');
+    el.textContent = 'Ingrese un email válido';
+    el.style.display = 'block';
+    isValid = false;
+  } else {
+    const el = document.getElementById('emailError');
+    el.textContent = '';
+    el.style.display = 'none';
+  }
+
+  // Validación de teléfono
+  const telefono = document.getElementById('telefono').value.trim();
+  if (!window.validarTelefonoChileno ? telefono.length < 9 : !window.validarTelefonoChileno(telefono)) {
+    const el = document.getElementById('telefonoError');
+    el.textContent = 'Ingrese un teléfono chileno válido (+56 9 XXXX XXXX)';
+    el.style.display = 'block';
+    isValid = false;
+  } else {
+    const el = document.getElementById('telefonoError');
+    el.textContent = '';
+    el.style.display = 'none';
+  }
+
+  // Validación de contraseña
+  if(!validatePassword()) {
+    const el = document.getElementById('newPasswordError');
+    el.style.display = 'block';
+    isValid = false;
+  } else {
+    const el = document.getElementById('newPasswordError');
+    el.style.display = 'none';
+  }
+
+  // Validación de confirmación de contraseña
+  if(!validatePasswordMatch()) {
+    const el = document.getElementById('confirmPasswordError');
+    el.style.display = 'block';
+    isValid = false;
+  } else {
+    const el = document.getElementById('confirmPasswordError');
+    el.style.display = 'none';
+  }
+
+  return isValid;
   }
   
   function validatePassword() {

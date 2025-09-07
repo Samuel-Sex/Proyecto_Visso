@@ -9,6 +9,39 @@
 (function() {
   "use strict";
 
+  // =================== [VALIDACIONES REUTILIZABLES] ===================
+  // Valida el formato y dígito verificador del RUT chileno
+  window.validarRut = function(rut) {
+    if (!rut) return false;
+    rut = rut.replace(/[^0-9kK]/g, '').toUpperCase();
+    if (rut.length < 8) return false;
+    let cuerpo = rut.slice(0, -1);
+    let dv = rut.slice(-1);
+    let suma = 0, multiplo = 2;
+    for (let i = cuerpo.length - 1; i >= 0; i--) {
+      suma += parseInt(cuerpo[i]) * multiplo;
+      multiplo = multiplo < 7 ? multiplo + 1 : 2;
+    }
+    let dvEsperado = 11 - (suma % 11);
+    dvEsperado = dvEsperado === 11 ? '0' : dvEsperado === 10 ? 'K' : dvEsperado.toString();
+    return dv === dvEsperado;
+  };
+
+  // Valida formato de email estándar
+  window.validarEmail = function(email) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  };
+
+  // Valida formato +56 9 XXXX XXXX
+  window.validarTelefonoChileno = function(telefono) {
+    return /^\+56\s?9\s?\d{4}\s?\d{4}$/.test(telefono);
+  };
+
+  // Mínimo 8 caracteres, 1 mayúscula, 1 minúscula, 1 número, 1 especial
+  window.validarPassword = function(password) {
+    return /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]).{8,}$/.test(password);
+  };
+
   /**
    * Apply .scrolled class to the body as the page is scrolled down
    */

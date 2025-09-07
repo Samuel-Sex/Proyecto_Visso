@@ -94,16 +94,23 @@
 
               <!-- Formulario de Registro -->
               <form id="registerForm" style="display: none">
-                <div class="mb-3">
-                  <label for="email" class="form-label">Email</label>
-                  <input type="email" class="form-control" id="email" required />
-                  <div id="emailError" class="error-message"></div>
-                </div>
 
                 <div class="mb-3">
                   <label for="newUsername" class="form-label">Nombre de Usuario</label>
                   <input type="text" class="form-control" id="newUsername" required />
-                  <div id="usernameError" class="error-message"></div>
+                  <div id="usernameError" class="error-message text-danger small" style="display:none"></div>
+                </div>
+
+                <div class="mb-3">
+                  <label for="rut" class="form-label">RUT</label>
+                  <input type="text" class="form-control" id="rut" required placeholder="12.345.678-9" />
+                  <div id="rutError" class="error-message text-danger small" style="display:none"></div>
+                </div>
+
+                <div class="mb-3">
+                  <label for="email" class="form-label">Email</label>
+                  <input type="email" class="form-control" id="email" required />
+                  <div id="emailError" class="error-message text-danger small" style="display:none"></div>
                 </div>
 
                 <div class="mb-3 position-relative">
@@ -112,7 +119,7 @@
                   <button type="button" class="btn btn-toggle-password">
                     <i class="bi bi-eye-fill"></i>
                   </button>
-                  <div id="newPasswordError" class="error-message"></div>
+                  <div id="newPasswordError" class="error-message text-danger small" style="display:none"></div>
                 </div>
 
                 <div class="mb-3 position-relative">
@@ -121,7 +128,12 @@
                   <button type="button" class="btn btn-toggle-password">
                     <i class="bi bi-eye-fill"></i>
                   </button>
-                  <div id="confirmPasswordError" class="error-message"></div>
+                  <div id="confirmPasswordError" class="error-message text-danger small" style="display:none"></div>
+                <div class="mb-3">
+                  <label for="telefono" class="form-label">Teléfono</label>
+                  <input type="text" class="form-control" id="telefono" required placeholder="+56 9 XXXX XXXX" />
+                  <div id="telefonoError" class="error-message text-danger small" style="display:none"></div>
+                </div>
                 </div>
 
                 <div class="d-grid gap-2">
@@ -136,23 +148,44 @@
     </section>
   </main>
 
-  <footer id="footer" class="footer mt-auto">
+    <footer class="footer bg-dark text-white pt-5 pb-3">
     <div class="container">
-      <div class="copyright text-center">
-        <p>© <span>Copyright</span> <strong class="px-1 sitename">Vesperr</strong> <span>All Rights Reserved</span></p>
+      <div class="row">
+        <div class="col-lg-5 mb-4">
+          <h5 class="mb-3">
+            <i class="fas fa-eye"></i> Visso Óptica
+          </h5>
+          <p class="mb-4">Tu visión es nuestra prioridad. Ofrecemos productos y servicios de calidad superior para cuidar tu salud visual.</p>
+          <img src="assets/img/logo_mod.png" alt="Logo Visso" class="rounded-circle mb-3" style="height: 64px; width: 64px; object-fit: cover;">
+        </div>
+        <div class="col-lg-3 mb-4">
+          <h6 class="mb-3">Enlaces</h6>
+          <ul class="list-unstyled">
+            <li><a href="#hero" class="text-white-50">Inicio</a></li>
+            <li><a href="tienda.html" class="text-white-50">Tienda</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-4 mb-4">
+          <h6 class="mb-3">Servicios</h6>
+          <ul class="list-unstyled">
+            <li class="text-white-50">Lentes Oftálmicos</li>
+            <li class="text-white-50">Gafas de Sol</li>
+            <li class="text-white-50">Lentes de Contacto</li>
+          </ul>
+        </div>
       </div>
-      <div class="social-links d-flex justify-content-center">
-        <a href=""><i class="bi bi-twitter-x"></i></a>
-        <a href=""><i class="bi bi-facebook"></i></a>
-        <a href=""><i class="bi bi-instagram"></i></a>
-        <a href=""><i class="bi bi-linkedin"></i></a>
-      </div>
-      <div class="credits">
-        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a> Distributed by
-        <a href="https://themewagon.com" target="_blank">ThemeWagon</a>
+      <hr class="my-4 border-secondary">
+      <div class="row align-items-center">
+        <div class="col-md-6">
+          <p class="text-white-50 mb-0">&copy; 2025 Visso Óptica. Todos los derechos reservados.</p>
+        </div>
+        <div class="col-md-6 text-md-end">
+          <a href="admin.html" class="text-white-50">Administración</a>
+        </div>
       </div>
     </div>
   </footer>
+ </footer>
 
   <!-- Scroll Top -->
   <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i
