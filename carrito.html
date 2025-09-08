@@ -37,7 +37,7 @@
   ======================================================== -->
 </head>
 
-<body class="starter-page-page">
+<body>
 
   <header id="header" class="header d-flex align-items-center sticky-top">
     <div class="container-fluid container-xl position-relative d-flex align-items-center">
@@ -185,6 +185,117 @@
 
 
   </main>
+
+  <!-- Modal de Checkout -->
+  <div class="modal fade" id="checkoutModal" tabindex="-1" aria-labelledby="checkoutModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="checkoutModalLabel">
+            <i class="bi bi-credit-card me-2"></i>Finalizar Compra
+          </h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+        </div>
+        <div class="modal-body">
+          <form id="checkoutForm">
+            <div class="row">
+              <div class="col-md-6">
+                <h6 class="mb-3">Información Personal</h6>
+                <div class="mb-3">
+                  <label for="checkoutNombre" class="form-label">Nombre Completo *</label>
+                  <input type="text" class="form-control" id="checkoutNombre" required>
+                </div>
+                <div class="mb-3">
+                  <label for="checkoutRut" class="form-label">RUT *</label>
+                  <input type="text" class="form-control" id="checkoutRut" placeholder="12.345.678-9" required>
+                </div>
+                <div class="mb-3">
+                  <label for="checkoutEmail" class="form-label">Email *</label>
+                  <input type="email" class="form-control" id="checkoutEmail" required>
+                </div>
+                <div class="mb-3">
+                  <label for="checkoutTelefono" class="form-label">Teléfono *</label>
+                  <input type="tel" class="form-control" id="checkoutTelefono" placeholder="+56 9 XXXX XXXX" required>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <h6 class="mb-3">Dirección de Envío</h6>
+                <div class="mb-3">
+                  <label for="checkoutDireccion" class="form-label">Dirección *</label>
+                  <input type="text" class="form-control" id="checkoutDireccion" required>
+                </div>
+                <div class="row">
+                  <div class="col-md-6 mb-3">
+                    <label for="checkoutComuna" class="form-label">Comuna *</label>
+                    <input type="text" class="form-control" id="checkoutComuna" required>
+                  </div>
+                  <div class="col-md-6 mb-3">
+                    <label for="checkoutRegion" class="form-label">Región *</label>
+                    <select class="form-select" id="checkoutRegion" required>
+                      <option value="">Seleccionar región</option>
+                      <option value="metropolitana">Región Metropolitana</option>
+                      <option value="valparaiso">Valparaíso</option>
+                      <option value="biobio">Biobío</option>
+                      <option value="araucania">La Araucanía</option>
+                      <option value="los-lagos">Los Lagos</option>
+                    </select>
+                  </div>
+                </div>
+                <h6 class="mb-3 mt-4">Método de Pago</h6>
+                <div class="mb-3">
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="metodoPago" id="pagoTarjeta" value="tarjeta" checked>
+                    <label class="form-check-label" for="pagoTarjeta">
+                      <i class="bi bi-credit-card me-2"></i>Tarjeta de Crédito/Débito
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="metodoPago" id="pagoTransferencia" value="transferencia">
+                    <label class="form-check-label" for="pagoTransferencia">
+                      <i class="bi bi-bank me-2"></i>Transferencia Bancaria
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-md-6">
+                <h6>Resumen del Pedido</h6>
+                <div id="checkoutResumen"></div>
+              </div>
+              <div class="col-md-6">
+                <div class="bg-light p-3 rounded">
+                  <div class="d-flex justify-content-between mb-2">
+                    <span>Subtotal:</span>
+                    <span id="checkoutSubtotal">$0</span>
+                  </div>
+                  <div class="d-flex justify-content-between mb-2">
+                    <span>Envío:</span>
+                    <span id="checkoutEnvio">Gratis</span>
+                  </div>
+                  <div class="d-flex justify-content-between mb-2" id="checkoutDescuentoRow" style="display: none;">
+                    <span>Descuento:</span>
+                    <span id="checkoutDescuento" class="text-success">-$0</span>
+                  </div>
+                  <hr>
+                  <div class="d-flex justify-content-between fw-bold">
+                    <span>Total:</span>
+                    <span id="checkoutTotal">$0</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-primary" onclick="finalizarCompra()">Confirmar Compra</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <footer class="footer bg-dark text-white pt-5 pb-3">
     <div class="container">
       <div class="row">
@@ -221,6 +332,9 @@
     </div>
   </footer>
  </footer>
+  <!-- Main JS File -->
+  <script src="assets/js/users-data.js"></script>
+  <script src="assets/js/session-manager.js"></script>
   <script src="assets/js/carrito.js"></script>
   <!-- Vendor JS Files (necesarios para modales y componentes) -->
   <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>

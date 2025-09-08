@@ -222,8 +222,179 @@ function procederPago() {
     mostrarNotificacion('Tu carrito está vacío', 'error');
     return;
   }
+  actualizarResumenCheckout();
   const modal = new bootstrap.Modal(document.getElementById('checkoutModal'));
   modal.show();
+  
+  // Agregar event listeners para actualización en tiempo real
+  agregarEventListenersCheckout();
+}
+
+function agregarEventListenersCheckout() {
+  const rutInput = document.getElementById('checkoutRut');
+  const telefonoInput = document.getElementById('checkoutTelefono');
+  
+  if (rutInput) {
+    rutInput.addEventListener('input', function() {
+      formatearRUT(this);
+      actualizarResumenCheckout();
+    });
+  }
+  
+  if (telefonoInput) {
+    telefonoInput.addEventListener('input', function() {
+      formatearTelefono(this);
+      actualizarResumenCheckout();
+    });
+  }
+  
+  // Agregar listeners a todos los campos para actualizar resumen
+  const campos = ['checkoutNombre', 'checkoutEmail', 'checkoutDireccion', 'checkoutComuna', 'checkoutRegion'];
+  campos.forEach(id => {
+    const campo = document.getElementById(id);
+    if (campo) {
+      campo.addEventListener('input', actualizarResumenCheckout);
+    }
+  });
+}
+
+function formatearRUT(input) {
+  let valor = input.value.replace(/[^0-9kK]/g, '');
+  
+  if (valor.length > 1) {
+    const cuerpo = valor.slice(0, -1);
+    const dv = valor.slice(-1);
+    
+    // Formatear con puntos
+    let cuerpoFormateado = cuerpo.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+    
+    input.value = cuerpoFormateado + '-' + dv;
+  } else {
+    input.value = valor;
+  }
+}
+
+function formatearTelefono(input) {
+  let valor = input.value.replace(/[^0-9+]/g, '');
+  
+  if (valor.startsWith('56')) {
+    // Formato: +56 9 XXXX XXXX
+    if (valor.length >= 11) {
+      valor = '+56 ' + valor.substring(2, 3) + ' ' + valor.substring(3, 7) + ' ' + valor.substring(7, 11);
+    } else if (valor.length >= 7) {
+      valor = '+56 ' + valor.substring(2, 3) + ' ' + valor.substring(3, 7) + ' ' + valor.substring(7);
+    } else if (valor.length >= 3) {
+      valor = '+56 ' + valor.substring(2, 3) + ' ' + valor.substring(3);
+    } else {
+      valor = '+56 ' + valor.substring(2);
+    }
+  } else if (valor.startsWith('9')) {
+    // Formato: +56 9 XXXX XXXX
+    if (valor.length >= 9) {
+      valor = '+56 ' + valor.substring(0, 1) + ' ' + valor.substring(1, 5) + ' ' + valor.substring(5, 9);
+    } else if (valor.length >= 5) {
+      valor = '+56 ' + valor.substring(0, 1) + ' ' + valor.substring(1, 5) + ' ' + valor.substring(5);
+    } else if (valor.length >= 1) {
+      valor = '+56 ' + valor.substring(0, 1) + ' ' + valor.substring(1);
+    }
+  } else if (valor.startsWith('+56')) {
+    // Ya tiene el formato correcto, solo formatear
+    valor = valor.replace('+56', '');
+    if (valor.length >= 9) {
+      valor = '+56 ' + valor.substring(0, 1) + ' ' + valor.substring(1, 5) + ' ' + valor.substring(5, 9);
+    } else if (valor.length >= 5) {
+      valor = '+56 ' + valor.substring(0, 1) + ' ' + valor.substring(1, 5) + ' ' + valor.substring(5);
+    } else if (valor.length >= 1) {
+      valor = '+56 ' + valor.substring(0, 1) + ' ' + valor.substring(1);
+    } else {
+      valor = '+56 ';
+    }
+  }
+  
+  input.value = valor;
+}
+
+function actualizarResumenCheckout() {
+  const resumenDiv = document.getElementById('checkoutResumen');
+  const subtotalSpan = document.getElementById('checkoutSubtotal');
+  const totalSpan = document.getElementById('checkoutTotal');
+  const descuentoRow = document.getElementById('checkoutDescuentoRow');
+  const descuentoSpan = document.getElementById('checkoutDescuento');
+
+  if (!resumenDiv || !subtotalSpan || !totalSpan) return;
+
+  // Obtener datos del formulario
+  const nombre = document.getElementById('checkoutNombre')?.value || '';
+  const rut = document.getElementById('checkoutRut')?.value || '';
+  const email = document.getElementById('checkoutEmail')?.value || '';
+  const telefono = document.getElementById('checkoutTelefono')?.value || '';
+  const direccion = document.getElementById('checkoutDireccion')?.value || '';
+  const comuna = document.getElementById('checkoutComuna')?.value || '';
+  const region = document.getElementById('checkoutRegion')?.value || '';
+
+  // Generar resumen de productos
+  let resumenHTML = '<h6 class="mb-3">Productos</h6>';
+  carrito.forEach(item => {
+    resumenHTML += `
+      <div class="d-flex justify-content-between align-items-center mb-2">
+        <div>
+          <small class="fw-bold">${item.nombre}</small>
+          <br><small class="text-muted">Cantidad: ${item.cantidad}</small>
+        </div>
+        <small class="fw-bold">$${(item.precio * item.cantidad).toLocaleString('es-CL')}</small>
+      </div>
+    `;
+  });
+  
+  // Agregar información del cliente si hay datos
+  if (nombre || rut || email || telefono || direccion) {
+    resumenHTML += '<hr><h6 class="mb-3 mt-3">Datos del Cliente</h6>';
+    
+    if (nombre) {
+      resumenHTML += `<div class="mb-1"><small><strong>Nombre:</strong> ${nombre}</small></div>`;
+    }
+    
+    if (rut) {
+      const rutValido = validarRUT(rut);
+      const iconoRut = rutValido ? '<i class="bi bi-check-circle text-success"></i>' : '<i class="bi bi-x-circle text-danger"></i>';
+      resumenHTML += `<div class="mb-1"><small><strong>RUT:</strong> ${rut} ${iconoRut}</small></div>`;
+    }
+    
+    if (email) {
+      resumenHTML += `<div class="mb-1"><small><strong>Email:</strong> ${email}</small></div>`;
+    }
+    
+    if (telefono) {
+      resumenHTML += `<div class="mb-1"><small><strong>Teléfono:</strong> ${telefono}</small></div>`;
+    }
+    
+    if (direccion || comuna || region) {
+      resumenHTML += '<div class="mb-1"><small><strong>Dirección:</strong> ';
+      if (direccion) resumenHTML += direccion;
+      if (comuna) resumenHTML += `, ${comuna}`;
+      if (region) resumenHTML += `, ${region}`;
+      resumenHTML += '</small></div>';
+    }
+  }
+  
+  resumenDiv.innerHTML = resumenHTML;
+
+  // Calcular totales
+  const subtotal = carrito.reduce((sum, item) => sum + (item.precio * item.cantidad), 0);
+  let descuento = 0;
+  
+  if (cuponAplicado) {
+    descuento = subtotal * cuponAplicado.descuento;
+    descuentoRow.style.display = 'flex';
+    descuentoSpan.textContent = `-$${descuento.toLocaleString('es-CL')}`;
+  } else {
+    descuentoRow.style.display = 'none';
+  }
+
+  const total = subtotal - descuento;
+  
+  subtotalSpan.textContent = `$${subtotal.toLocaleString('es-CL')}`;
+  totalSpan.textContent = `$${total.toLocaleString('es-CL')}`;
 }
 
 function finalizarCompra() {
@@ -236,14 +407,17 @@ function finalizarCompra() {
   }
 
   // Validar RUT (simplificado)
-  const rut = document.getElementById('rut').value.trim();
+  const rut = document.getElementById('checkoutRut').value.trim();
   if (!validarRUT(rut)) {
-    document.getElementById('rut').setCustomValidity('RUT inválido');
+    document.getElementById('checkoutRut').setCustomValidity('RUT inválido');
     form.classList.add('was-validated');
     return;
   } else {
-    document.getElementById('rut').setCustomValidity('');
+    document.getElementById('checkoutRut').setCustomValidity('');
   }
+
+  // Actualizar resumen del checkout antes de finalizar
+  actualizarResumenCheckout();
 
   // Simular procesamiento del pago
   const modal = bootstrap.Modal.getInstance(document.getElementById('checkoutModal'));
@@ -264,9 +438,37 @@ function finalizarCompra() {
 }
 
 function validarRUT(rut) {
-  // Validación simplificada del RUT chileno
-  const rutRegex = /^[0-9]+[-|‐]{1}[0-9kK]{1}$/;
-  return rutRegex.test(rut);
+  // Limpiar el RUT de puntos, espacios y guiones
+  const rutLimpio = rut.replace(/[^0-9kK]/g, '');
+  
+  // Verificar que tenga al menos 2 caracteres (número + dígito verificador)
+  if (rutLimpio.length < 2) {
+    return false;
+  }
+  
+  // Separar cuerpo y dígito verificador
+  const cuerpo = rutLimpio.slice(0, -1);
+  const dv = rutLimpio.slice(-1).toLowerCase();
+  
+  // Verificar que el cuerpo sean solo números
+  if (!/^[0-9]+$/.test(cuerpo)) {
+    return false;
+  }
+  
+  // Calcular dígito verificador
+  let suma = 0;
+  let multiplicador = 2;
+  
+  // Recorrer de derecha a izquierda
+  for (let i = cuerpo.length - 1; i >= 0; i--) {
+    suma += parseInt(cuerpo.charAt(i)) * multiplicador;
+    multiplicador = multiplicador === 7 ? 2 : multiplicador + 1;
+  }
+  
+  const resto = suma % 11;
+  const dvCalculado = resto === 0 ? '0' : resto === 1 ? 'k' : (11 - resto).toString();
+  
+  return dv === dvCalculado;
 }
 
 function mostrarNotificacion(mensaje, tipo = 'success', duracion = 3000) {

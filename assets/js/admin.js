@@ -5,12 +5,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Datos de ejemplo (en producción estos vendrían de una base de datos)
     // Eliminada declaración duplicada de users. Usar solo la versión con los 5 campos obligatorios.
-            let users = [
-                {id: 1, rut: "12.345.678-9", name: "Ana García", email: "ana@email.com", phone: "+56 9 5555 0101", password: "Admin123!", date: "2024-01-15"},
-                {id: 2, rut: "11.222.333-4", name: "Carlos Ruiz", email: "carlos@email.com", phone: "+56 9 5555 0102", password: "Admin123!", date: "2024-01-20"},
-                {id: 3, rut: "15.666.777-8", name: "María López", email: "maria@email.com", phone: "+56 9 5555 0103", password: "Admin123!", date: "2024-02-05"},
-                {id: 4, rut: "18.999.000-1", name: "José Hernández", email: "jose@email.com", phone: "+56 9 5555 0104", password: "Admin123!", date: "2024-02-10"}
-            ];
+            // Usar sistema de almacenamiento compartido
+            let users = window.UsersData ? window.UsersData.getUsers() : [];
     
         let products = [
             {id: 1, name: "Ray-Ban Aviador Clásico", category: "lentes-sol", price: 129990, stock: 25, brand: "Ray-Ban", description: "Lentes de sol estilo aviador clásico"},
@@ -42,28 +38,28 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             });
             userForm.userRut.addEventListener('input', function() {
-                if (!window.validarRut(this.value.trim())) {
+                if (!validarRUT(this.value.trim())) {
                     userRutError.textContent = 'Ingrese un RUT válido';
                 } else {
                     userRutError.textContent = '';
                 }
             });
             userForm.userEmail.addEventListener('input', function() {
-                if (!window.validarEmail(this.value.trim())) {
+                if (!validarEmail(this.value.trim())) {
                     userEmailError.textContent = 'Ingrese un email válido';
                 } else {
                     userEmailError.textContent = '';
                 }
             });
             userForm.userPhone.addEventListener('input', function() {
-                if (!window.validarTelefonoChileno(this.value.trim())) {
+                if (!validarTelefonoChileno(this.value.trim())) {
                     userPhoneError.textContent = 'Ingrese un teléfono chileno válido (+56 9 XXXX XXXX)';
                 } else {
                     userPhoneError.textContent = '';
                 }
             });
             userForm.userPassword.addEventListener('input', function() {
-                if (!window.validarPassword(this.value)) {
+                if (!validarPassword(this.value)) {
                     userPasswordError.textContent = 'La contraseña debe tener al menos 8 caracteres, 1 mayúscula, 1 minúscula, 1 número y 1 carácter especial';
                 } else {
                     userPasswordError.textContent = '';
@@ -79,19 +75,19 @@ document.addEventListener('DOMContentLoaded', function() {
                     userNameError.textContent = 'El nombre debe tener al menos 3 caracteres';
                     valid = false;
                 }
-                if (!window.validarRut(userForm.userRut.value.trim())) {
+                if (!validarRUT(userForm.userRut.value.trim())) {
                     userRutError.textContent = 'Ingrese un RUT válido';
                     valid = false;
                 }
-                if (!window.validarEmail(userForm.userEmail.value.trim())) {
+                if (!validarEmail(userForm.userEmail.value.trim())) {
                     userEmailError.textContent = 'Ingrese un email válido';
                     valid = false;
                 }
-                if (!window.validarTelefonoChileno(userForm.userPhone.value.trim())) {
+                if (!validarTelefonoChileno(userForm.userPhone.value.trim())) {
                     userPhoneError.textContent = 'Ingrese un teléfono chileno válido (+56 9 XXXX XXXX)';
                     valid = false;
                 }
-                if (!window.validarPassword(userForm.userPassword.value)) {
+                if (!validarPassword(userForm.userPassword.value)) {
                     userPasswordError.textContent = 'La contraseña debe tener al menos 8 caracteres, 1 mayúscula, 1 minúscula, 1 número y 1 carácter especial';
                     valid = false;
                 }
@@ -111,32 +107,35 @@ document.addEventListener('DOMContentLoaded', function() {
     // FUNCIONES DE USUARIOS
     function loadUsers() {
         const tbody = document.getElementById('usersTableBody');
+        if (!tbody) return;
+        
         tbody.innerHTML = '';
         
-                users.forEach(user => {
-                    const row = `
-                        <tr>
-                            <td>${user.id}</td>
-                            <td>${user.rut}</td>
-                            <td>${user.name}</td>
-                            <td>${user.email}</td>
-                            <td>${user.phone}</td>
-                            <td>********</td>
-                            <td>${user.date}</td>
-                            <td>
-                                <div class="d-flex gap-2">
-                                    <button class="btn btn-success btn-sm" onclick="editUser(${user.id})" title="Editar">
-                                        <i class="fas fa-edit"></i>
-                                    </button>
-                                    <button class="btn btn-danger btn-sm" onclick="deleteUser(${user.id})" title="Eliminar">
-                                        <i class="fas fa-trash"></i>
-                                    </button>
-                                </div>
-                            </td>
-                        </tr>
-                    `;
-                    tbody.innerHTML += row;
-                });
+        users.forEach(user => {
+            const row = `
+                <tr>
+                    <td>${user.id}</td>
+                    <td>${user.rut}</td>
+                    <td>${user.name}</td>
+                    <td>${user.email}</td>
+                    <td>${user.phone}</td>
+                    <td>********</td>
+                    <td>${user.date}</td>
+                    <td>
+                        <div class="d-flex gap-2">
+                            <button class="btn btn-success btn-sm" onclick="editUser(${user.id})" title="Editar">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button class="btn btn-danger btn-sm" onclick="deleteUser(${user.id})" title="Eliminar">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            `;
+            tbody.innerHTML += row;
+        });
+    }
     function filterUsers() {
         const searchTerm = document.getElementById('userSearch').value.toLowerCase();
         const tbody = document.getElementById('usersTableBody');
@@ -182,7 +181,7 @@ document.addEventListener('DOMContentLoaded', function() {
             modalTitle.textContent = 'Editar Usuario';
             const user = users.find(u => u.id === userId);
             if (user) {
-                  form.rut.value = user.rut;
+                document.getElementById('userRut').value = user.rut;
                 document.getElementById('userId').value = user.id;
                 document.getElementById('userName').value = user.name;
                 document.getElementById('userEmail').value = user.email;
@@ -194,7 +193,6 @@ document.addEventListener('DOMContentLoaded', function() {
             form.reset();
             document.getElementById('userId').value = '';
         }
-    }
     }
 
     function editUser(userId) {
@@ -213,9 +211,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 let valid = true;
 
                 // Validaciones globales y mensajes en el formulario
-                        if (!window.validarRut(rut)) {
+                        if (!validarRUT(rut)) {
                             const el = document.getElementById('userRutError');
-                            el.textContent = 'Ingrese un RUT válido';
+                            el.textContent = 'Ingrese un RUT válido (formato: 12345678-9)';
                             el.style.display = 'block';
                             valid = false;
                         } else {
@@ -233,7 +231,7 @@ document.addEventListener('DOMContentLoaded', function() {
                             el.textContent = '';
                             el.style.display = 'none';
                         }
-                        if (!window.validarEmail(email)) {
+                        if (!validarEmail(email)) {
                             const el = document.getElementById('userEmailError');
                             el.textContent = 'Ingrese un email válido';
                             el.style.display = 'block';
@@ -243,7 +241,7 @@ document.addEventListener('DOMContentLoaded', function() {
                             el.textContent = '';
                             el.style.display = 'none';
                         }
-                        if (!window.validarTelefonoChileno(phone)) {
+                        if (!validarTelefonoChileno(phone)) {
                             const el = document.getElementById('userPhoneError');
                             el.textContent = 'Ingrese un teléfono chileno válido (+56 9 XXXX XXXX)';
                             el.style.display = 'block';
@@ -253,7 +251,7 @@ document.addEventListener('DOMContentLoaded', function() {
                             el.textContent = '';
                             el.style.display = 'none';
                         }
-                        if (!window.validarPassword(password)) {
+                        if (!validarPassword(password)) {
                             const el = document.getElementById('userPasswordError');
                             el.textContent = 'La contraseña debe tener al menos 8 caracteres, 1 mayúscula, 1 minúscula, 1 número y 1 carácter especial';
                             el.style.display = 'block';
@@ -292,6 +290,11 @@ document.addEventListener('DOMContentLoaded', function() {
                     users.push(newUser);
                 }
 
+                // Guardar cambios en el sistema compartido
+                if (window.UsersData) {
+                    window.UsersData.saveUsers(users);
+                }
+
                 loadUsers();
                 updateStats();
 
@@ -302,6 +305,12 @@ document.addEventListener('DOMContentLoaded', function() {
     function deleteUser(userId) {
         if (confirm('¿Estás seguro de que quieres eliminar este usuario?')) {
             users = users.filter(u => u.id !== userId);
+            
+            // Guardar cambios en el sistema compartido
+            if (window.UsersData) {
+                window.UsersData.saveUsers(users);
+            }
+            
             loadUsers();
             updateStats();
         }
@@ -310,6 +319,8 @@ document.addEventListener('DOMContentLoaded', function() {
     // FUNCIONES DE PRODUCTOS
     function loadProducts() {
         const tbody = document.getElementById('productsTableBody');
+        if (!tbody) return;
+        
         tbody.innerHTML = '';
         
         products.forEach(product => {
@@ -478,3 +489,27 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('totalUsers').textContent = users.length;
         document.getElementById('totalProducts').textContent = products.length;
     }
+
+    // Funciones de validación
+    function validarRUT(rut) {
+        const rutRegex = /^[0-9]+[-|‐]{1}[0-9kK]{1}$/;
+        return rutRegex.test(rut);
+    }
+
+    function validarEmail(email) {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(email);
+    }
+
+    function validarTelefonoChileno(telefono) {
+        // Acepta formatos: +56912345678, 56912345678, 912345678, 9 1234 5678
+        const telefonoRegex = /^(\+?56)?\s?9\s?[0-9]{4}\s?[0-9]{4}$/;
+        return telefonoRegex.test(telefono.replace(/\s/g, ''));
+    }
+
+    function validarPassword(password) {
+        // Al menos 8 caracteres, 1 mayúscula, 1 minúscula, 1 número y 1 carácter especial
+        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+        return passwordRegex.test(password);
+    }
+

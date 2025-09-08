@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Validar al enviar
   form.addEventListener('submit', function(e) {
-    if (telefonoInput.value.trim() && !window.validarTelefonoChileno(telefonoInput.value.trim())) {
+    if (telefonoInput.value.trim() && !validarTelefonoChileno(telefonoInput.value.trim())) {
       telefonoError.style.display = 'block';
       telefonoError.textContent = 'Por favor ingresa un teléfono chileno válido (+56 9 XXXX XXXX)';
       telefonoInput.focus();
@@ -17,6 +17,13 @@ document.addEventListener('DOMContentLoaded', function() {
       telefonoError.textContent = '';
     }
   });
+
+// Función para validar teléfono chileno
+function validarTelefonoChileno(telefono) {
+  // Acepta formatos: +56912345678, 56912345678, 912345678, 9 1234 5678
+  const telefonoRegex = /^(\+?56)?\s?9\s?[0-9]{4}\s?[0-9]{4}$/;
+  return telefonoRegex.test(telefono.replace(/\s/g, ''));
+}
 });
 
 
