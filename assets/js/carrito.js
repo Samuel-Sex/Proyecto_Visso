@@ -237,7 +237,12 @@ function agregarEventListenersCheckout() {
   if (rutInput) {
     rutInput.addEventListener('input', function() {
       formatearRUT(this);
+      validarRUTEnTiempoReal(this);
       actualizarResumenCheckout();
+    });
+    
+    rutInput.addEventListener('blur', function() {
+      validarRUTEnTiempoReal(this);
     });
   }
   
@@ -248,25 +253,48 @@ function agregarEventListenersCheckout() {
     });
   }
   
+  // Agregar listener para filtrar comunas por región
+  const regionSelect = document.getElementById('checkoutRegion');
+  if (regionSelect) {
+    regionSelect.addEventListener('change', function() {
+      filtrarComunasPorRegion(this.value);
+      actualizarResumenCheckout();
+    });
+  }
+  
   // Agregar listeners a todos los campos para actualizar resumen
-  const campos = ['checkoutNombre', 'checkoutEmail', 'checkoutDireccion', 'checkoutComuna', 'checkoutRegion'];
+  const campos = ['checkoutNombre', 'checkoutEmail', 'checkoutDireccion', 'checkoutComuna'];
   campos.forEach(id => {
     const campo = document.getElementById(id);
     if (campo) {
       campo.addEventListener('input', actualizarResumenCheckout);
+      if (id === 'checkoutComuna') {
+        campo.addEventListener('change', actualizarResumenCheckout);
+      }
     }
   });
-}
+  
+  // Inicializar comunas (mostrar todas al cargar)
+  filtrarComunasPorRegion('');}
+
 
 function formatearRUT(input) {
   let valor = input.value.replace(/[^0-9kK]/g, '');
+  
+  // Limitar a máximo 9 caracteres
+  if (valor.length > 9) {
+    valor = valor.slice(0, 9);
+  }
   
   if (valor.length > 1) {
     const cuerpo = valor.slice(0, -1);
     const dv = valor.slice(-1);
     
-    // Formatear con puntos
-    let cuerpoFormateado = cuerpo.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+    // Formatear con puntos solo si hay suficientes dígitos
+    let cuerpoFormateado = cuerpo;
+    if (cuerpo.length > 3) {
+      cuerpoFormateado = cuerpo.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+    }
     
     input.value = cuerpoFormateado + '-' + dv;
   } else {
@@ -461,7 +489,7 @@ function validarRUT(rut) {
   
   // Recorrer de derecha a izquierda
   for (let i = cuerpo.length - 1; i >= 0; i--) {
-    suma += parseInt(cuerpo.charAt(i)) * multiplicador;
+    suma += parseInt(cuerpo[i]) * multiplicador;
     multiplicador = multiplicador === 7 ? 2 : multiplicador + 1;
   }
   
@@ -469,6 +497,135 @@ function validarRUT(rut) {
   const dvCalculado = resto === 0 ? '0' : resto === 1 ? 'k' : (11 - resto).toString();
   
   return dv === dvCalculado;
+}
+
+function validarRUTEnTiempoReal(input) {
+  const rut = input.value.trim();
+  
+  // Remover clases previas
+  input.classList.remove('is-valid', 'is-invalid');
+  
+  // Remover mensaje de error previo
+  const errorMsg = input.parentNode.querySelector('.invalid-feedback');
+  if (errorMsg) {
+    errorMsg.remove();
+  }
+  
+  // Si está vacío, no mostrar validación
+  if (rut.length === 0) {
+    return;
+  }
+  
+  // Si el RUT está incompleto (menos de 8 caracteres sin formato), no validar aún
+  const rutSinFormato = rut.replace(/[.-]/g, '');
+  if (rutSinFormato.length < 8) {
+    return;
+  }
+  
+  // Validar solo si el RUT parece completo
+  const esValido = validarRUT(rut);
+  
+  if (esValido) {
+    input.classList.add('is-valid');
+  } else {
+    input.classList.add('is-invalid');
+    
+    // Agregar mensaje de error
+    const mensajeError = document.createElement('div');
+    mensajeError.className = 'invalid-feedback';
+    mensajeError.textContent = 'RUT inválido. Formato: 12.345.678-9';
+    input.parentNode.appendChild(mensajeError);
+  }
+}
+
+function filtrarComunasPorRegion(regionSeleccionada) {
+  const comunaSelect = document.getElementById('checkoutComuna');
+  if (!comunaSelect) return;
+  
+  // Definir comunas por región
+  const comunasPorRegion = {
+    'metropolitana': [
+      {value: 'santiago', text: 'Santiago'},
+      {value: 'providencia', text: 'Providencia'},
+      {value: 'las-condes', text: 'Las Condes'},
+      {value: 'vitacura', text: 'Vitacura'},
+      {value: 'nunoa', text: 'Ñuñoa'},
+      {value: 'la-reina', text: 'La Reina'},
+      {value: 'penalolen', text: 'Peñalolén'},
+      {value: 'macul', text: 'Macul'},
+      {value: 'san-miguel', text: 'San Miguel'},
+      {value: 'maipu', text: 'Maipú'},
+      {value: 'pudahuel', text: 'Pudahuel'},
+      {value: 'quilicura', text: 'Quilicura'},
+      {value: 'huechuraba', text: 'Huechuraba'},
+      {value: 'independencia', text: 'Independencia'},
+      {value: 'recoleta', text: 'Recoleta'},
+      {value: 'conchali', text: 'Conchalí'},
+      {value: 'renca', text: 'Renca'},
+      {value: 'quinta-normal', text: 'Quinta Normal'},
+      {value: 'estacion-central', text: 'Estación Central'},
+      {value: 'cerrillos', text: 'Cerrillos'},
+      {value: 'lo-prado', text: 'Lo Prado'},
+      {value: 'cerro-navia', text: 'Cerro Navia'},
+      {value: 'la-cisterna', text: 'La Cisterna'},
+      {value: 'san-ramon', text: 'San Ramón'},
+      {value: 'la-granja', text: 'La Granja'},
+      {value: 'san-joaquin', text: 'San Joaquín'},
+      {value: 'la-pintana', text: 'La Pintana'},
+      {value: 'puente-alto', text: 'Puente Alto'},
+      {value: 'san-bernardo', text: 'San Bernardo'}
+    ],
+    'valparaiso': [
+      {value: 'valparaiso', text: 'Valparaíso'},
+      {value: 'vina-del-mar', text: 'Viña del Mar'},
+      {value: 'concon', text: 'Concón'},
+      {value: 'quilpue', text: 'Quilpué'},
+      {value: 'villa-alemana', text: 'Villa Alemana'}
+    ],
+    'biobio': [
+      {value: 'concepcion', text: 'Concepción'},
+      {value: 'talcahuano', text: 'Talcahuano'},
+      {value: 'chiguayante', text: 'Chiguayante'},
+      {value: 'san-pedro-de-la-paz', text: 'San Pedro de la Paz'},
+      {value: 'hualpen', text: 'Hualpén'}
+    ],
+    'araucania': [
+      {value: 'temuco', text: 'Temuco'},
+      {value: 'padre-las-casas', text: 'Padre Las Casas'},
+      {value: 'villarrica', text: 'Villarrica'},
+      {value: 'pucon', text: 'Pucón'}
+    ],
+    'los-lagos': [
+      {value: 'puerto-montt', text: 'Puerto Montt'},
+      {value: 'puerto-varas', text: 'Puerto Varas'},
+      {value: 'osorno', text: 'Osorno'},
+      {value: 'castro', text: 'Castro'}
+    ]
+  };
+  
+  // Limpiar opciones actuales (excepto la primera)
+  comunaSelect.innerHTML = '<option value="">Seleccionar comuna</option>';
+  
+  // Determinar qué comunas mostrar
+  let comunasAMostrar = [];
+  
+  if (regionSeleccionada && comunasPorRegion[regionSeleccionada]) {
+    // Mostrar solo comunas de la región seleccionada
+    comunasAMostrar = comunasPorRegion[regionSeleccionada];
+  } else {
+    // Mostrar todas las comunas si no hay región seleccionada
+    Object.values(comunasPorRegion).forEach(comunasRegion => {
+      comunasAMostrar = comunasAMostrar.concat(comunasRegion);
+    });
+  }
+  
+  // Agregar las opciones al select
+  comunasAMostrar.forEach(comuna => {
+    const option = document.createElement('option');
+    option.value = comuna.value;
+    option.textContent = comuna.text;
+    comunaSelect.appendChild(option);
+  });
 }
 
 function mostrarNotificacion(mensaje, tipo = 'success', duracion = 3000) {
